@@ -1,0 +1,13 @@
+<h1>냉장고 물품 수정하기</h1>
+
+<form action="updaterecord/" method="post">
+    {% csrf_token %}
+    물품 : <input name="item" value="{{ updateItem.item }}"><br>
+    냉장고에 들어간 날짜 : <input name="date_add_frige" value="{{ updateItem.date_add_frige }}"><br>
+    냉장/냉동 선택 : <input name="freezing" value="{{ updateItem.date_add_frige }}"><br>
+    유통기한 : <input name="date_expire" value="{{ updateItem.date_expire }}"><br>
+    수량 : <input name="quantity" value="{{ updateItem.quantity }}"><br>
+    출처 : <input name="source" value="{{ updateItem.source }}"><br>
+    기타 : <input name="etc" value="{{ updateItem.etc }}"><br>
+    <input type="submit" value="Submit">
+</form>
