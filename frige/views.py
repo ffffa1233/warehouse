@@ -92,7 +92,7 @@ def update(request, frige_id):
 
 def updaterecord(request, frige_id):
     item = request.POST['item']
-    date_input = datetime.strftime(timezone.now(), '%Y-%m-%d %H:%M:%s')
+    date_input = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%s')
     date_add_frige = request.POST['date_add_frige']
     freezing = request.POST['freezing']
     date_expire = request.POST['date_expire']
