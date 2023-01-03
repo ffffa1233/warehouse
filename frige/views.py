@@ -57,7 +57,7 @@ def add(request):
 
 def addrecord(request):
     item = request.POST['item']
-    date_input = datetime.strftime(timezone.now(), '%Y-%m-%d %H:%M:%s')
+    date_input = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%s')
     date_add_frige = request.POST['date_add_frige']
     freezing = request.POST['freezing']
     date_expire = request.POST['date_expire']
