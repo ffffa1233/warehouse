@@ -1,13 +1,24 @@
-<h1>냉장고 물품 수정하기</h1>
+{% extends "frige/base.html" %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+{% endblock %}
 
-<form action="updaterecord/" method="post">
-    {% csrf_token %}
-    물품 : <input name="item" value="{{ updateItem.item }}"><br>
-    냉장고에 들어간 날짜 : <input name="date_add_frige" value="{{ updateItem.date_add_frige }}"><br>
-    냉장/냉동 선택 : <input name="freezing" value="{{ updateItem.date_add_frige }}"><br>
-    유통기한 : <input name="date_expire" value="{{ updateItem.date_expire }}"><br>
-    수량 : <input name="quantity" value="{{ updateItem.quantity }}"><br>
-    출처 : <input name="source" value="{{ updateItem.source }}"><br>
-    기타 : <input name="etc" value="{{ updateItem.etc }}"><br>
-    <input type="submit" value="Submit">
-</form>
+{% block content %}
+<div class="container">
+    <h3>냉장고 물품 수정하기</h3>
+    <div class="container">
+        <form action="updaterecord/" method="post">
+            {% csrf_token %}
+            물품 : <input name="item" value="{{ updateItem.item }}"><br>
+            냉장고에 들어간 날짜 : <input name="date_add_frige" value="{{ updateItem.date_add_frige }}"><br>
+            냉장/냉동 선택 : <input name="freezing" value="{{ updateItem.date_add_frige }}"><br>
+            유통기한 : <input name="date_expire" value="{{ updateItem.date_expire }}"><br>
+            수량 : <input name="quantity" value="{{ updateItem.quantity }}"><br>
+            출처 : <input name="source" value="{{ updateItem.source }}"><br>
+            기타 : <input name="etc" value="{{ updateItem.etc }}"><br>
+            <button type="submit" class="btn btn-info">제출</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'delete' updateItem.id %}'" >삭제</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

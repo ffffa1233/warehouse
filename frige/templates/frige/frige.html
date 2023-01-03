@@ -1,71 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="10">
-    <title>냉장고</title>
-</head>
-<body>
-<h1>냉장고</h1>
-    <p>
-        <a href="add/">냉장고 물품 기입하기</a>
-    </p>
-    <table border="1">
-        <tr>
-            <td>구     분</td>
-            <td>물     품</td>
-            <td>들어온 날짜</td>
-            <td>유통  기한</td>
-            <td>수     량</td>
-            <td>출     처</td>
-            <td>기     타</td>
-            <td>수     정</td>
-            <td>삭     제</td>
-        </tr>
-        {% for x in myFrigeItem %}
-        {% if x.freezing != '냉동' %}
-        <tr>
-            <td>{{ x.id }}</td>
-            <td>{{ x.item }}</td>
-            <td>{{ x.date_add_frige }}</td>
-            <td>{{ x.date_expire }}</td>
-            <td>{{ x.quantity }}</td>
-            <td>{{ x.source }}</td>
-            <td>{{ x.etc }}</td>
-            <td><a href="{% url 'update' x.id %}">Update</a></td>
-            <td><a href="{% url 'delete' x.id %}">Delete</a></td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
-<h1>냉동고</h1>
-    <table border="1">
-        <tr>
-            <td>구     분</td>
-            <td>물     품</td>
-            <td>들어온 날짜</td>
-            <td>유통  기한</td>
-            <td>수     량</td>
-            <td>출     처</td>
-            <td>기     타</td>
-            <td>수     정</td>
-            <td>삭     제</td>
-        </tr>
-        {% for x in myFrigeItem %}
-        {% if x.freezing == '냉동' %}
-        <tr>
-            <td>{{ x.id }}</td>
-            <td>{{ x.item }}</td>
-            <td>{{ x.date_add_frige }}</td>
-            <td>{{ x.date_expire }}</td>
-            <td>{{ x.quantity }}</td>
-            <td>{{ x.source }}</td>
-            <td>{{ x.etc }}</td>
-            <td><a href="{% url 'update' x.id %}">Update</a></td>
-            <td><a href="{% url 'delete' x.id %}">Delete</a></td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </table>
-</body>
-</html>
+{% extends "frige/base.html" %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+{% endblock %}
+
+{% block content %}
+<!--이 곳에 페이지의 내용 작성-->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>냉장고</h3>
+            {% for x,y in myFrigeItem %}
+                <div class="container bg-light">
+                    <h5>{{ x }}</h5>
+                        <div class="container">
+                            {% for z in y %}
+                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
+                                {% if forloop.counter|divisibleby:5 %}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <h3>냉동고</h3>
+            {% for x,y in myFrigeItem_Ice %}
+                <div class="containter" style="background-color:#f8f9fa">
+                    <h5>{{ x }}</h5>
+                        <div class="containter">
+                            {% for z in y %}
+                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
+                                {% if forloop.counter == 5 %}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
