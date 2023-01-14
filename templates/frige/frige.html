@@ -44,6 +44,23 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="col">
+            <h3>찬장</h3>
+            {% for x,y in myFrigeItem_Cupboard %}
+                <div class="containter" style="background-color:#f8f9fa">
+                    <h5>{{ x }}</h5>
+                        <div class="containter">
+                            {% for z in y %}
+                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
+                                {% if forloop.counter == 5 %}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    <br>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock content %}

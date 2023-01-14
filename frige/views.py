@@ -15,6 +15,7 @@ def index(request):
     myFrigeItemAll = FrigeItem.objects.all().order_by('date_add_frige').values()
     myFrigeItemForHtml = {}
     myFrigeItemForHtml_Ice = {}
+    myFrigeItemForHtml_Cupboard = {}
     dt_now = datetime.datetime.now()
     for frigeItem in myFrigeItemAll:
         frigeItemDateType = time.strptime(frigeItem['date_add_frige'], '%Y-%m-%d')
@@ -23,10 +24,14 @@ def index(request):
             if frigeItemKey not in myFrigeItemForHtml:
                 myFrigeItemForHtml[frigeItemKey] = []
             myFrigeItemForHtml[frigeItemKey].append(frigeItem)
-        else:
+        elif frigeItem['freezing'] == '냉동':
             if frigeItemKey not in myFrigeItemForHtml_Ice:
                 myFrigeItemForHtml_Ice[frigeItemKey] = []
             myFrigeItemForHtml_Ice[frigeItemKey].append(frigeItem)
+        elif frigeItem['freezing'] == '찬장':
+            if frigeItemKey not in myFrigeItemForHtml_Cupboard:
+                myFrigeItemForHtml_Cupboard[frigeItemKey] = []
+            myFrigeItemForHtml_Cupboard[frigeItemKey].append(frigeItem)
 
         #print(dateStr['item'] + ":", end='')
         #print(time.strptime(dateStr['date_add_frige'], '%Y-%m-%d').tm_mon)
@@ -43,6 +48,7 @@ def index(request):
     context = {
         'myFrigeItem': myFrigeItemForHtml.items(),
         'myFrigeItem_Ice': myFrigeItemForHtml_Ice.items(),
+        'myFrigeItem_Cupboard': myFrigeItemForHtml_Cupboard.items(),
     #    'myFrigeItem_year_month' : myFrigeItem_year_month,
         #'myFrigeItem_Idx': 1,
     }

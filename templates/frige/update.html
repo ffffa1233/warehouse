@@ -15,9 +15,15 @@
                           {% if updateItem.freezing == '냉장' %}
                             <option value="냉장" selected>냉장</option>
                             <option value="냉동">냉동</option>
-                          {% else %}
+                            <option value="찬장">찬장</option>
+                          {% elif updateItem.freezing == '냉동' %}
                             <option value="냉장">냉장</option>
                             <option value="냉동" selected>냉동</option>
+                            <option value="찬장">찬장</option>
+                          {% elif updateItem.freezing == '찬장' %}
+                            <option value="냉장">냉장</option>
+                            <option value="냉동">냉동</option>
+                            <option value="찬장" selected>찬장</option>
                           {% endif %}
                           </select><br>
             유통기한 : <input name="date_expire" value="{{ updateItem.date_expire }}"><br>
