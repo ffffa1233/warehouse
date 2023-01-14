@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+{% endblock %}
+{% block style %}
+    <meta http-equiv="refresh" content="30">
+{% endblock %}
+
+{% block content %}
+<!--이 곳에 페이지의 내용 작성-->
+<div class="container">
+    <div class="row">
+        <ol class="list-group list-group-numbered">
+            {% for item in myNoticeItem %}
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ item.title }}</div>
+                        {{ item.context }}
+                    </div>
+                    <span class="badge bg-info rounded-pill">
+                        <a href="update/{{ item.id }}">수정</a>
+                    </span>
+                    <span class="badge bg-warning rounded-pill">
+                        <a href="delete/{{ item.id }}">삭제</a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock content %}

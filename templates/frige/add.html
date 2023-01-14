@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3>냉장고 물품 기입하기</h3>
+    <div class="container">
+        <form action="addrecord/" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">물품</label>
+                <input type="text" class="form-control" name="item"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">냉장고에 들어간 날짜</label>
+                <input type="date" class="form-control" name="date_add_frige"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">냉장/냉동 선택</label>
+                <select class="form-select" name="freezing">
+                    <option value="냉장">냉장</option>
+                    <option value="냉동">냉동</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">유통기한</label>
+                <input type="date" class="form-control" name="date_expire"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">수량</label>
+                <input type="text" class="form-control" name="quantity"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">출처</label>
+                <input type="text" class="form-control" name="source"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">기타</label>
+                <input type="text" class="form-control" name="etc"/>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">입력</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

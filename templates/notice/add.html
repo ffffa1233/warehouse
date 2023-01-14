@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+{% endblock %}
+{% block style %}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h3>공지사항 추가하기</h3>
+    <div class="container">
+        <form action="addrecord/" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">제목</label>
+                <input type="text" class="form-control" name="title"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">카테고리</label>
+                <input type="text" class="form-control" name="category"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">내용</label>
+                <textarea class="form-control" name="context"></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">입력</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

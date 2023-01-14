@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,13 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
                     '192.168.35.211',
-                    'localhost'
+                    'localhost',
+                    '127.0.0.1',
                 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'notice.apps.NoticeConfig',
     'frige.apps.FrigeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'warehouse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -118,8 +121,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join('staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIR = [
+    BASE_DIR / 'static',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

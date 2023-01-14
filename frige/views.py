@@ -75,13 +75,13 @@ def addrecord(request):
         etc=etc
     )
     frigeItem.save()
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('frige:index'))
 
 
 def delete(request, frige_id):
     deleteItem = FrigeItem.objects.get(id=frige_id)
     deleteItem.delete()
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('frige:index'))
 
 
 def update(request, frige_id):
@@ -110,5 +110,5 @@ def updaterecord(request, frige_id):
     updateItem.source = source
     updateItem.etc = etc
     updateItem.save()
-    return HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('frige:index'))
 

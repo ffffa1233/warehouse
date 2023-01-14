@@ -1,4 +1,4 @@
-{% extends "frige/base.html" %}
+{% extends "base.html" %}
 {% block static %}
 <!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
 {% endblock %}
@@ -25,7 +25,7 @@
             출처 : <input name="source" value="{{ updateItem.source }}"><br>
             기타 : <input name="etc" value="{{ updateItem.etc }}"><br>
             <button type="submit" class="btn btn-info">제출</button>
-            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'delete' updateItem.id %}'" >삭제</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='{% url 'frige:delete' updateItem.id %}'" >삭제</button>
         </form>
     </div>
 </div>

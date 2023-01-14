@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="30">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <title>냉장고</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>WAREHOUSE</title>
     {% block style %}
     {% endblock %}
 </head>
@@ -24,10 +24,16 @@
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'index' %}">냉장/냉동</a>
+          <a class="nav-link" href="{% url 'frige:index' %}">냉장고</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{% url 'frige:add' %}"><i class="bi bi-database-add"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'add' %}">항목추가</a>
+          <a class="nav-link" href="{% url 'notice:index' %}">공지사항</a>
+        </li>
+        <li>
+          <a class="nav-link" href="{% url 'notice:add' %}"><i class="bi bi-database-add"></i></a>
         </li>
       </ul>
     </div>
