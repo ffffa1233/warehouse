@@ -19,7 +19,7 @@ def index(request):
     dt_now = datetime.datetime.now()
     for frigeItem in myFrigeItemAll:
         frigeItemDateType = time.strptime(frigeItem['date_add_frige'], '%Y-%m-%d')
-        frigeItemKey = str(frigeItemDateType.tm_year)[2:] + '. ' + str(frigeItemDateType.tm_mon)
+        frigeItemKey = str(frigeItemDateType.tm_year)[2:] + '. ' + str(frigeItemDateType.tm_mon).zfill(2)
         if frigeItem['freezing'] == '냉장':
             if frigeItemKey not in myFrigeItemForHtml:
                 myFrigeItemForHtml[frigeItemKey] = []

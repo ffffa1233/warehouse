@@ -12,56 +12,54 @@
     <div class="row">
         <div class="col">
             <h3>냉장고</h3>
-            {% for x,y in myFrigeItem %}
             <div class="container bg-light" ondrop="updateToFrige(event)" ondragover="event.preventDefault()">
-                <!-- <h5>{{ x }}</h5> -->
                 <ul class="list-group">
-                    {% for z in y %}
-                    <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
-                        <div class="ms-2 me-auto">
-                            <span class="fw-bold">{{ z.item }}</span>
-                            <span class="badge bg-dark rounded-pill">{{ x }}</span>
-                        </div>
-
-                    </li>
+                    {% for x,y in myFrigeItem %}
+                        <li class="list-group-item" style="word-break:keep-all">
+                            <span class="ms-2 me-auto badge bg-dark rounded-pill">{{ x }}</span>
+                            {% for z in y %}
+                            <span class="ms-2 me-auto fw-bold " id="{{z.id}}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                                {{ z.item }}
+                            </span>
+                            {% endfor %}
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
-            {% endfor %}
         </div>
         <div class="col">
             <h3>냉동고</h3>
-            {% for x,y in myFrigeItem_Ice %}
-                <div class="container bg-light" ondrop="updateToIce(event)" ondragover="event.preventDefault()">
-                    <ul class="list-group">
-                        {% for z in y %}
-                        <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
-                            <div class="ms-2 me-auto">
-                                <span class="fw-bold">{{ z.item }}</span>
-                                <span class="badge bg-dark rounded-pill">{{ x }}</span>
-                            </div>
+            <div class="container bg-light" ondrop="updateToIce(event)" ondragover="event.preventDefault()">
+                <ul class="list-group">
+                    {% for x,y in myFrigeItem_Ice %}
+                        <li class="list-group-item" style="word-break:keep-all">
+                            <span class="ms-2 me-auto badge bg-dark rounded-pill">{{ x }}</span>
+                            {% for z in y %}
+                            <span class="ms-2 me-auto fw-bold " id="{{z.id}}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                                {{ z.item }}
+                            </span>
+                            {% endfor %}
                         </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="col">
             <h3>찬장</h3>
-            {% for x,y in myFrigeItem_Cupboard %}
-                <div class="container bg-light" ondrop="updateToCupboard(event)" ondragover="event.preventDefault()">
-                    <ul class="list-group">
-                        {% for z in y %}
-                        <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
-                            <div class="ms-2 me-auto">
-                                <span class="fw-bold">{{ z.item }}</span>
-                                <span class="badge bg-dark rounded-pill">{{ x }}</span>
-                            </div>
+           <div class="container bg-light" ondrop="updateToCupboard(event)" ondragover="event.preventDefault()">
+                <ul class="list-group">
+                    {% for x,y in myFrigeItem_Cupboard %}
+                        <li class="list-group-item" style="word-break:keep-all">
+                            <span class="ms-2 me-auto badge bg-dark rounded-pill">{{ x }}</span>
+                            {% for z in y %}
+                            <span class="ms-2 me-auto fw-bold " id="{{z.id}}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                                {{ z.item }}
+                            </span>
+                            {% endfor %}
                         </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
