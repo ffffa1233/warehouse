@@ -19,7 +19,7 @@ def index(request):
     dt_now = datetime.datetime.now()
     for frigeItem in myFrigeItemAll:
         frigeItemDateType = time.strptime(frigeItem['date_add_frige'], '%Y-%m-%d')
-        frigeItemKey = str(frigeItemDateType.tm_year) + '년 ' + str(frigeItemDateType.tm_mon) + '월'
+        frigeItemKey = str(frigeItemDateType.tm_year)[2:] + '. ' + str(frigeItemDateType.tm_mon)
         if frigeItem['freezing'] == '냉장':
             if frigeItemKey not in myFrigeItemForHtml:
                 myFrigeItemForHtml[frigeItemKey] = []
@@ -95,6 +95,23 @@ def update(request, frige_id):
     template = loader.get_template('frige/update.html')
     return HttpResponse(template.render({'updateItem': updateItem}, request))
 
+def updateToFrige(request, frige_id):
+    updateItem = FrigeItem.objects.get(id=frige_id)
+    updateItem.freezing = '냉장'
+    updateItem.save()
+    return HttpResponseRedirect(reverse('frige:index'))
+
+def updateToIce(request, frige_id):
+    updateItem = FrigeItem.objects.get(id=frige_id)
+    updateItem.freezing = '냉동'
+    updateItem.save()
+    return HttpResponseRedirect(reverse('frige:index'))
+
+def updateToCupboard(request, frige_id):
+    updateItem = FrigeItem.objects.get(id=frige_id)
+    updateItem.freezing = '찬장'
+    updateItem.save()
+    return HttpResponseRedirect(reverse('frige:index'))
 
 def updaterecord(request, frige_id):
     item = request.POST['item']

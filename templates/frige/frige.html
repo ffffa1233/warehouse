@@ -13,54 +13,88 @@
         <div class="col">
             <h3>냉장고</h3>
             {% for x,y in myFrigeItem %}
-                <div class="container bg-light">
-                    <h5>{{ x }}</h5>
-                        <div class="container">
-                            {% for z in y %}
-                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
-                                {% if forloop.counter|divisibleby:5 %}
-                                    <br>
-                                {% endif %}
-                            {% endfor %}
+            <div class="container bg-light" ondrop="updateToFrige(event)" ondragover="event.preventDefault()">
+                <!-- <h5>{{ x }}</h5> -->
+                <ul class="list-group">
+                    {% for z in y %}
+                    <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                        <div class="ms-2 me-auto">
+                            <span class="fw-bold">{{ z.item }}</span>
+                            <span class="badge bg-dark rounded-pill">{{ x }}</span>
                         </div>
-                    <br>
-                </div>
+
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endfor %}
         </div>
         <div class="col">
             <h3>냉동고</h3>
             {% for x,y in myFrigeItem_Ice %}
-                <div class="containter" style="background-color:#f8f9fa">
-                    <h5>{{ x }}</h5>
-                        <div class="containter">
-                            {% for z in y %}
-                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
-                                {% if forloop.counter == 5 %}
-                                    <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    <br>
+                <div class="container bg-light" ondrop="updateToIce(event)" ondragover="event.preventDefault()">
+                    <ul class="list-group">
+                        {% for z in y %}
+                        <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                            <div class="ms-2 me-auto">
+                                <span class="fw-bold">{{ z.item }}</span>
+                                <span class="badge bg-dark rounded-pill">{{ x }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% endfor %}
         </div>
         <div class="col">
             <h3>찬장</h3>
             {% for x,y in myFrigeItem_Cupboard %}
-                <div class="containter" style="background-color:#f8f9fa">
-                    <h5>{{ x }}</h5>
-                        <div class="containter">
-                            {% for z in y %}
-                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
-                                {% if forloop.counter == 5 %}
-                                    <br>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    <br>
+                <div class="container bg-light" ondrop="updateToCupboard(event)" ondragover="event.preventDefault()">
+                    <ul class="list-group">
+                        {% for z in y %}
+                        <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                            <div class="ms-2 me-auto">
+                                <span class="fw-bold">{{ z.item }}</span>
+                                <span class="badge bg-dark rounded-pill">{{ x }}</span>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             {% endfor %}
         </div>
     </div>
 </div>
 {% endblock content %}
+{% block script %}
+function drag(ev) {
+    ev.dataTransfer.setData('text', ev.target.id);
+    console.log(ev.target.id);
+}
+function update(id) {
+    window.location.href= 'update/'+id;
+}
+function updateToFrige(ev) {
+    //ev.preventDefault();
+    var id = ev.dataTransfer.getData('text');
+    //console.log(id);
+   window.location.href='updateToFrige/'+id;
+}
+function updateToIce(ev) {
+    //ev.preventDefault();
+    var id = ev.dataTransfer.getData('text');
+    //console.log(id);
+   window.location.href='updateToIce/'+id;
+}
+function updateToCupboard(ev) {
+    //ev.preventDefault();
+    var id = ev.dataTransfer.getData('text');
+    //console.log(id);
+   window.location.href='updateToCupboard/'+id;
+}
+function deleteItem(id) {
+    console.log('delete'+id);
+    window.location.href='delete/'+id;
+}
+
+{% endblock %}
