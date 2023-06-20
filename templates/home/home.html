@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block static %}
 <!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
 {% endblock %}
@@ -9,6 +10,43 @@
 {% block content %}
 <!--이 곳에 페이지의 내용 작성-->
 <div class="container">
-  test
+    <div class="row">
+        <div class="col-6" style="background-color:#ff6633">
+            pictures
+        </div>
+        <div class="col-6" style="background-color:#ffff33">
+            pictures
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3" style="background-color:#ff2233; height:100%">
+            <img src="{% static 'Frige_QR_Code.png' %}" width="100%">
+            <img src="{% static 'Frige_QR_Code2.png' %}" width="100%">
+            <img src="{% static 'Frige_QR_Code3.png' %}" width="100%">
+        </div>
+        <div class="col-3" style="background-color:#ffdd33; height:100%; text-align:center">
+            <h1 id="current-time"></h1>
+        </div>
+        <div class="col-3"  style="background-color:#ffee33; height:100%;text-align:center">
+            <h1>20.00 C</h1>
+            <h1>20.00 C</h1>
+        </div>
+        <div class="col-3"  style="background-color:#ff22ee; height:100%;text-align:center">
+            <h1>50%</h1>
+        </div>
+    </div>
 </div>
 {% endblock content %}
+{% block javascript %}
+function updateTime() {
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
+  const formattedTime = `${hours}:${minutes}:${seconds}`;
+  document.getElementById('current-time').textContent = formattedTime;
+}
+
+setInterval(updateTime, 1000); // Update the time every second
+
+{% endblock javascript %}

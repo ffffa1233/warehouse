@@ -1,0 +1,45 @@
+{% extends "schedule_calendar/base.html" %}
+{% load static %}
+{% block static %}
+<!--이 곳에 static에 해당하는 코드 (css파일 연결 등) 작성-->
+
+{% endblock %}
+{% block content %}
+<h1>hello</h1>
+<div id="naver_id_login"></div>
+<div id='calendar'></div>
+<script type="text/javascript">
+  	var naver_id_login = new naver_id_login("CcRkjfJZeexdbzAXHFYP", "http://127.0.0.1:8000/calendar/callback");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8000/calendar");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        // events: "{% url 'calendar_events' %}",
+        //plugins: [ 'dayGrid' ],
+        initialView: 'dayGridMonth',
+        initialDate: '2023-01-01',
+        eventSources: [{
+            url: 'https://openapi.naver.com/calendar/events',
+            type: 'POST',
+            headers: {
+                'Authorization': 'Bearer AAAAOP2oJgatpmGpMJYnhnT2fVb6CWpZW93TAh0xf-700PniDA8_PN-f1mcgx5GfJ2ZPE5yuR4OD6yMQsBJoWc8m7Os'
+            },
+            data: {
+                calendarId: 'primary'
+            },
+            error: function() {
+                alert('There was an error fetching events!');
+            }
+        }]
+    });
+    calendar.render();
+});
+</script>
+{% endblock content %}

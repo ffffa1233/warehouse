@@ -13,6 +13,15 @@
         <div class="col">
             <h3>냉장고</h3>
             {% for x,y in myFrigeItem %}
+            <div class="container bg-light" ondrop="updateToFrige(event)" ondragover="event.preventDefault()">
+                <!-- <h5>{{ x }}</h5> -->
+                <ul class="list-group">
+                    {% for z in y %}
+                    <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">{{ z.item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--
                 <div class="container bg-light">
                     <h5>{{ x }}</h5>
                         <div class="container">
@@ -25,22 +34,38 @@
                         </div>
                     <br>
                 </div>
+                -->
             {% endfor %}
         </div>
         <div class="col">
             <h3>냉동고</h3>
             {% for x,y in myFrigeItem_Ice %}
-                <div class="containter" style="background-color:#f8f9fa">
+                <div class="container" style="background-color:#f8f9fa"  ondrop="updateToIce(event)" ondragover="event.preventDefault()">
+                    <ul class="list-group">
+                        {% for z in y %}
+                        <li class="list-group-item" id="{{ z.id }}" draggable="true" ondragstart="drag(event)" style="text-align:center" onclick="update({{z.id}})">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{ z.item }}</div>
+                            </div>
+                            <span class="badge bg-dark rounded-pill">{{ x }}</span>
+                            <span class="badge bg-dark rounded-pill" onclick="deleteItem({{z.id}})"><i class="bi bi-trash"></i></span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!--
                     <h5>{{ x }}</h5>
                         <div class="containter">
                             {% for z in y %}
-                                <a href="update/{{z.id}}/">[{{ z.item }}]</a>
+                            <div id='{{z.item}}' draggable="true" ondragstart="drag(event)">
+                                <a href="update/{{z.id}}/" draggable="true" ondragstart="drag(event)">[{{ z.item }}]</a>
                                 {% if forloop.counter == 5 %}
                                     <br>
                                 {% endif %}
+                            </div>
                             {% endfor %}
                         </div>
                     <br>
+                    -->
                 </div>
             {% endfor %}
         </div>
@@ -49,7 +74,7 @@
             {% for x,y in myFrigeItem_Cupboard %}
                 <div class="containter" style="background-color:#f8f9fa">
                     <h5>{{ x }}</h5>
-                        <div class="containter">
+                        <div class="container">
                             {% for z in y %}
                                 <a href="update/{{z.id}}/">[{{ z.item }}]</a>
                                 {% if forloop.counter == 5 %}
@@ -63,4 +88,29 @@
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}
+{% block javascript %}
+function drag(ev) {
+    ev.dataTransfer.setData('text', ev.target.id);
+    console.log(ev.target.id);
+}
+function update(id) {
+    window.location.href= 'update/'+id;
+}
+function updateToFrige(ev) {
+    //ev.preventDefault();
+    var id = ev.dataTransfer.getData('text');
+    //console.log(id);
+   window.location.href='updateToFrige/'+id;
+}
+function updateToIce(ev) {
+    //ev.preventDefault();
+    var id = ev.dataTransfer.getData('text');
+    //console.log(id);
+   window.location.href='updateToIce/'+id;
+}
+function deleteItem(id) {
+console.log('delete'+id);
+    window.location.href='delete/'+id;
+}
+{% endblock %}
